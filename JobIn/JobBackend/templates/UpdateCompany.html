@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+{% extends 'Index.html' %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="body">
+<div class="card">
+    <div class="card-header">
+        <h5>Update company Details Here</h5>
+    </div>
+    <div class="card-block">
+        <form method="post" action="{% url 'UpdateCompanyButton' dataid=company.id %}" enctype="multipart/form-data">
+            {% csrf_token %}
+             <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Company Name:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control form-control-round" placeholder="Company Name" name="companyName" value="{{company.companyName}}" required>
+                </div>
+            </div>
+            <br>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Information:</label>
+                <div class="col-sm-10">
+                    <textarea rows="5" cols="5" class="form-control form-control-round" placeholder="  Company Info" name="companyInfo" required>{{company.information}}</textarea>
+                </div>
+            </div>
+            <br>
+             <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Country:</label>
+                <div class="col-sm-10">
+                    <select name="country" class="form-control form-control-round" required>
+                        <option>{{company.country}}</option>
+                        {% for d in cr %}
+                        <option>{{d.countryName}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <br>
+             <div class="form-group row">
+                <label class="col-sm-2 col-form-label ">Company Profile:</label>
+                <div class="col-sm-10">
+                    <img src="{{company.companyProfile.url}}" width="50px" height="50px" class="form-control-round">
+                    <br>
+                    <br>
+                    <input type="file" class="form-control  form-control-round" name="companyProfile">
+                </div>
+            </div>
+            <br><br>
+
+
+            <button style="margin-left:955px;" type="reset" class="btn waves-effect waves-light btn-grd-danger btn-sm btn-round waves-effect">
+                <i class="ti-back-right">
+            </i>Reset</button>
+            <form action="{% url 'EditCompany' %}">
+            <button type="submit" class="btn waves-effect waves-light btn-grd-success btn-sm btn-round waves-effect">
+                <i class="ti-cloud-up">
+            </i>Update</button>
+            </form>
+            <br><br>
+
+        </form>
+        </div>
+    </div>
+</div>
+<style>
+    .body{
+    margin-left:10px;
+    margin-right:10px;
+    margin-top:10px;
+    }
+</style>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
+{% if messages %}
+  {% for i in messages %}
+     {% if i.tags == 'warning' %}
+       <script>
+         swal('{{i}}','','warning');
+       </script>
+     {% elif i.tags == 'error' %}
+       <script>
+         swal('{{i}}','','error');
+       </script>
+     {% elif i.tags == 'success' %}
+       <script>
+         swal('{{i}}','','success');
+       </script>
+     {% else %}
+        <script>
+          swal('{{i}}','','info');
+        </script>
+    {% endif %}
+  {% endfor %}
+{% endif %}
+
+</body>
+</html>
+{% endblock %}

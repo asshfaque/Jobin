@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+{% extends 'Index.html' %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="body">
+<div class="card">
+  <div class="card-header">
+    <h5>Country Details:</h5>
+    <div class="card-header-right">
+      <ul class="list-unstyled card-option">
+        <li><i class="fa fa fa-wrench open-card-option"></i></li>
+        <li><i class="fa fa-window-maximize full-card"></i></li>
+        <li><i class="fa fa-minus minimize-card"></i></li>
+        <li><i class="fa fa-refresh reload-card"></i></li>
+        <li><i class="fa fa-trash close-card"></i></li>
+      </ul>
+    </div>
+  </div>
+  <div class="card-block table-border-style">
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>Country Name</th>
+          <th>Location</th>
+          <th>Image</th>
+          <th></th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for d in more %}
+        <tr>
+          <td>{{d.id}}</td>
+          <td>{{d.countryName}}</td>
+          <td>{{d.location}}</td>
+          <td>
+            <img src="{{d.countryFlag.url}}" width="50px" height="50px" class="img-circle" alt="">
+          </td>
+          <td>
+            <form action="{% url 'UpdateCountry' dataid=d.id %}">
+            <button   class="btn waves-effect waves-light btn-grd-success btn-sm btn-round waves-effect">
+            <i class="ti-pencil-alt2"></i>Edit</button>
+            </form>
+          </td>
+          <td>
+            <form action="{% url 'DeleteCountry' dataid=d.id  %}">
+          <button  class="btn waves-effect waves-light btn-grd-danger btn-sm btn-round waves-effect">
+            <i class="ti-trash"></i>Delete</button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+   <div style="margin-left:1050px">
+         <form action="{% url 'Settings' %}">
+          <button  class="btn waves-effect waves-light btn-grd-primary btn-sm btn-round waves-effect">
+            <i class="ti-shift-left"></i>Back</button>
+            </form>
+          </div>
+</div>
+
+<style>
+    .body{
+    margin-left:10px;
+    margin-right:10px;
+    margin-top:10px;
+    }
+</style>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
+{% if messages %}
+  {% for i in messages %}
+     {% if i.tags == 'warning' %}
+       <script>
+         swal('{{i}}','','warning');
+       </script>
+     {% elif i.tags == 'error' %}
+       <script>
+         swal('{{i}}','','error');
+       </script>
+     {% elif i.tags == 'success' %}
+       <script>
+         swal('{{i}}','','success');
+       </script>
+     {% else %}
+        <script>
+          swal('{{i}}','','info');
+        </script>
+    {% endif %}
+  {% endfor %}
+{% endif %}
+
+</body>
+</html>
+{% endblock %}

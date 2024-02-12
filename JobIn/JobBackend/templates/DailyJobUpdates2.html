@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+{% extends 'Index.html' %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="body">
+<div class="card">
+  <div class="card-header">
+    <h5>Job Details:</h5>
+    <div class="card-header-right">
+      <ul class="list-unstyled card-option">
+        <li><i class="fa fa fa-wrench open-card-option"></i></li>
+        <li><i class="fa fa-window-maximize full-card"></i></li>
+        <li><i class="fa fa-minus minimize-card"></i></li>
+        <li><i class="fa fa-refresh reload-card"></i></li>
+        <li><i class="fa fa-trash close-card"></i></li>
+      </ul>
+    </div>
+  </div>
+  <div class="card-block table-border-style">
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+        <tr>
+          <th>Jobs</th>
+          <th>Job Details</th>
+          <th>Qualification</th>
+          <th>Experience</th>
+          <th>Date</th>
+          <th>Time</th>
+          <th>Location</th>
+          <th>Contact Number</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for D in job %}
+        <tr>
+          <td>{{D.job}}</td>
+          <td>{{D.jobDetails}}</td>
+          <td>{{D.qualification}}</td>
+          <td>{{D.experience}}</td>
+          <td>{{D.date}}</td>
+          <td>{{D.time}}</td>
+          <td>{{D.location}}</td>
+          <td>{{D.contactNumber}}</td>
+            <td>
+            <form action="{% url 'Deleteall' dataid=D.id  %}">
+          <button  class="btn waves-effect waves-light btn-grd-danger btn-sm btn-round waves-effect">
+            <i class="ti-trash"></i>Delete</button>
+            </form>
+          </td>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</div>
+<div style="margin-left:1050px">
+         <form action="{% url 'DailyUpdates1' %}">
+          <button  class="btn waves-effect waves-light btn-grd-primary btn-sm btn-round waves-effect">
+            <i class="ti-shift-left"></i>Back</button>
+            </form>
+          </div>
+
+<style>
+    .body{
+    margin-left:10px;
+    margin-right:10px;
+    margin-top:10px;
+    }
+</style>
+
+</body>
+</html>
+{% endblock %}

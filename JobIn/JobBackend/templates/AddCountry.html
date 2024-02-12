@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+{% extends 'Index.html' %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="body">
+<div class="card">
+    <div class="card-header">
+        <h5>Add Countries Here</h5>
+    </div>
+    <div class="card-block">
+        <form method="post" action="{% url 'CountrySave' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+             <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Country Name:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control form-control-round" placeholder="Country Name" name="countryName" required>
+                </div>
+            </div>
+            <br>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Location:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control form-control-round" placeholder="Location" name="location" required>
+                </div>
+            </div>
+            <br>
+             <div class="form-group row">
+                <label class="col-sm-2 col-form-label ">Image:</label>
+                <div class="col-sm-10">
+                    <input type="file" class="form-control  form-control-round" name="countryFlag" required>
+                </div>
+            </div>
+            <br><br>
+
+
+            <button style="margin-left:955px;" type="reset" class="btn waves-effect waves-light btn-grd-danger btn-sm btn-round waves-effect">
+                <i class="ti-back-right">
+            </i>Reset</button>
+
+            <button type="submit" class="btn waves-effect waves-light btn-grd-success btn-sm btn-round waves-effect">
+                <i class="ti-cloud-up">
+            </i>Submit</button>
+            <br><br>
+
+        </form>
+        </div>
+    </div>
+</div>
+<style>
+    .body{
+    margin-left:10px;
+    margin-right:10px;
+    margin-top:10px;
+    }
+</style>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
+{% if messages %}
+  {% for i in messages %}
+     {% if i.tags == 'warning' %}
+       <script>
+         swal('{{i}}','','warning');
+       </script>
+     {% elif i.tags == 'error' %}
+       <script>
+         swal('{{i}}','','error');
+       </script>
+     {% elif i.tags == 'success' %}
+       <script>
+         swal('{{i}}','','success');
+       </script>
+     {% else %}
+        <script>
+          swal('{{i}}','','info');
+        </script>
+    {% endif %}
+  {% endfor %}
+{% endif %}
+
+
+</body>
+</html>
+{% endblock %}

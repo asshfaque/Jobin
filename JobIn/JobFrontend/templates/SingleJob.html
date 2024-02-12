@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+{% extends 'Home.html' %}
+{% block content %}
+{% load static%}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div class="about">
+   <div class="container">
+      <div class="row">
+         <dir class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+            <div class="about_box">
+               <figure><img src="{% static 'images/bbbbb.jpg' %}" height="700px"></figure>
+            </div>
+         </dir>
+          <dir class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+            <div class="about_box">
+               <h3>{{data.companyName}}</h3>
+                <p><b>Hiring:</b>  {{data.job}}</p>
+               <p><b>Info:</b>  {{data.jobDetails}}</p>
+               <p><b>Qualification:</b>  {{data.qualification}}</p>
+               <p><b>Experience:</b>  {{data.experience}}</p>
+                <br>
+                <h4>Interview Details:</h4>
+               <p><b>Date:</b>  {{data.date}}</p>
+               <p><b>Time:</b>  {{data.time}}</p>
+               <p><b>Location:</b>  {{data.location}}</p>
+               <p><b>Contact:</b>  {{data.contactNumber}}</p>
+            </div>
+         </dir>
+      </div>
+   </div>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+</body>
+</html>
+{% endblock %}
